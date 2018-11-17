@@ -34,5 +34,14 @@ namespace SportChallenge.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("table")]
+        public async Task<IActionResult> GetTournamentTable(string tournamentName)
+        {
+            var request = new GetTournamentTableRequest(tournamentName);
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
     }
 }
