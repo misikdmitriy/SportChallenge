@@ -6,6 +6,9 @@ using SportChallenge.Models;
 
 namespace SportChallenge.Controllers
 {
+    /// <summary>
+    /// Game controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
@@ -17,7 +20,15 @@ namespace SportChallenge.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Post game result
+        /// </summary>
+        /// <param name="tournamentName">Tournament name</param>
+        /// <param name="saveResultModel">Game result</param>
+        /// <returns>Ok</returns>
         [HttpPut("{tournamentName}")]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(500)]
         public async Task<IActionResult> SaveResult(string tournamentName, SaveResultModel saveResultModel)
         {
             var request = new CreateGameResultRequest(tournamentName, 

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportChallenge", "SportChallenge\SportChallenge.csproj", "{6647FBB9-3AE9-4D5F-92B4-ACC090180D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportChallenge", "SportChallenge\SportChallenge.csproj", "{6647FBB9-3AE9-4D5F-92B4-ACC090180D40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportChallenge.Core", "SportChallenge.Core\SportChallenge.Core.csproj", "{DBBEC791-781F-4534-9FA3-1CC297D58A40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportChallenge.Core", "SportChallenge.Core\SportChallenge.Core.csproj", "{DBBEC791-781F-4534-9FA3-1CC297D58A40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

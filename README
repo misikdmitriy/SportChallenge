@@ -1,0 +1,11 @@
+Чтоб собрать сервис:
+    - запустить docker-compose up
+    - ОС: Windows
+
+Сервис будет доступен по урле http://localhost:8080
+API документация находится по пути http://localhost:8080/swagger. Там описанно доступное API.
+
+CSV формат чуствительный, не редактировать в MS Excel, использовать его в режиме read-only.
+Пример CSV файла лежит в папке SportChallenge.Examples.
+
+Загружать CSV нужно с помощью form-data, CSV заатачить как файл (есть скрин с постмана в папке SportChallenge.Examples).

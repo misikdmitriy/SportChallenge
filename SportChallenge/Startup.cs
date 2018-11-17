@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ using SportChallenge.Core.Repositories.Contracts;
 using SportChallenge.Core.Services;
 using SportChallenge.Core.Services.Contracts;
 using SportChallenge.MediatorRequests;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace SportChallenge
 {
@@ -34,6 +36,14 @@ namespace SportChallenge
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+
+                var filePath = Path.Combine(AppContext.BaseDirectory, "SportChallenge.xml");
+                c.IncludeXmlComments(filePath);
+            });
 
             services.AddDbContext<SportContext>(optionsBuilder =>
             {
@@ -114,6 +124,11 @@ namespace SportChallenge
             }
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
