@@ -11,8 +11,6 @@ namespace SportChallenge.Core.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.HomeTeam).WithMany();
             builder.HasOne(x => x.GuestTeam).WithMany();
-            builder.Property(x => x.GuestTeamResult);
-            builder.Property(x => x.HomeTeamResult);
         }
     }
 }

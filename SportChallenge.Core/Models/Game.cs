@@ -5,7 +5,6 @@
         public int Id { get; set; }
         public Team HomeTeam { get; set; }
         public Team GuestTeam { get; set; }
-        public int? HomeTeamResult { get; set; }
-        public int? GuestTeamResult { get; set; }
+        public GameResult Result { get; set; }
     }
 }

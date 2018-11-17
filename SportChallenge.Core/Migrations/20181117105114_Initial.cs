@@ -61,8 +61,6 @@ namespace SportChallenge.Core.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     HomeTeamId = table.Column<int>(nullable: true),
                     GuestTeamId = table.Column<int>(nullable: true),
-                    HomeTeamResult = table.Column<int>(nullable: true),
-                    GuestTeamResult = table.Column<int>(nullable: true),
                     RoundId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -88,6 +86,33 @@ namespace SportChallenge.Core.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "GameResult",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    HomeTeamResult = table.Column<int>(nullable: false),
+                    GuestTeamResult = table.Column<int>(nullable: false),
+                    GameId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameResult", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GameResult_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameResult_GameId",
+                table: "GameResult",
+                column: "GameId",
+                unique: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_Games_GuestTeamId",
                 table: "Games",
@@ -111,6 +136,9 @@ namespace SportChallenge.Core.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "GameResult");
+
             migrationBuilder.DropTable(
                 name: "Games");
 

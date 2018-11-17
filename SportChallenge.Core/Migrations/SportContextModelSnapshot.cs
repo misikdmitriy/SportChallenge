@@ -27,11 +27,7 @@ namespace SportChallenge.Core.Migrations
 
                     b.Property<int?>("GuestTeamId");
 
-                    b.Property<int?>("GuestTeamResult");
-
                     b.Property<int?>("HomeTeamId");
-
-                    b.Property<int?>("HomeTeamResult");
 
                     b.Property<int?>("RoundId");
 
@@ -44,6 +40,26 @@ namespace SportChallenge.Core.Migrations
                     b.HasIndex("RoundId");
 
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("SportChallenge.Core.Models.GameResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GameId");
+
+                    b.Property<int>("GuestTeamResult");
+
+                    b.Property<int>("HomeTeamResult");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId")
+                        .IsUnique();
+
+                    b.ToTable("GameResult");
                 });
 
             modelBuilder.Entity("SportChallenge.Core.Models.Round", b =>
@@ -106,10 +122,18 @@ namespace SportChallenge.Core.Migrations
                         .HasForeignKey("RoundId");
                 });
 
+            modelBuilder.Entity("SportChallenge.Core.Models.GameResult", b =>
+                {
+                    b.HasOne("SportChallenge.Core.Models.Game")
+                        .WithOne("Result")
+                        .HasForeignKey("SportChallenge.Core.Models.GameResult", "GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SportChallenge.Core.Models.Team", b =>
                 {
                     b.HasOne("SportChallenge.Core.Models.Tournament", "Tournament")
-                        .WithMany()
+                        .WithMany("Teams")
                         .HasForeignKey("TournamentId");
                 });
 #pragma warning restore 612, 618
