@@ -7,16 +7,16 @@ EXPOSE 80/tcp
 
 FROM microsoft/dotnet:2.1-sdk-nanoserver-1709 AS build
 WORKDIR /src
-COPY ["PasswordSharing.Web/PasswordSharing.Web.csproj", "PasswordSharing.Web/"]
-RUN dotnet restore "PasswordSharing.Web/PasswordSharing.Web.csproj"
+COPY ["SportChallenge/SportChallenge.csproj", "SportChallenge/"]
+RUN dotnet restore "SportChallenge/SportChallenge.csproj"
 COPY . .
-WORKDIR "/src/PasswordSharing.Web"
-RUN dotnet build "PasswordSharing.Web.csproj" -c Release -o /app
+WORKDIR "/src/SportChallenge"
+RUN dotnet build "SportChallenge.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "PasswordSharing.Web.csproj" -c Release -o /app
+RUN dotnet publish "SportChallenge.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "PasswordSharing.Web.dll", "--urls", "http://*:80"]
+ENTRYPOINT ["dotnet", "SportChallenge.dll", "--urls", "http://*:80"]
