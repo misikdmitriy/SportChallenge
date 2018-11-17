@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using SportChallenge.Core.DbContexts;
-using SportChallenge.Core.DbContexts.Contracts;
 using SportChallenge.Core.Models;
-using SportChallenge.Core.Repositories;
 using SportChallenge.Core.Services.Contracts;
 
 namespace SportChallenge.Core.Services
 {
     public class TournamentFactory : ITournamentFactory
     {
-        private readonly IContextFactory<SportContext> _contextFactory;
-
-        public TournamentFactory(IContextFactory<SportContext> contextFactory)
-        {
-            _contextFactory = contextFactory;
-        }
-
         public async Task<Tournament> Create(string name, params string[] teamNames)
         {
             if (teamNames == null || teamNames.Length < 2)
@@ -36,13 +26,15 @@ namespace SportChallenge.Core.Services
                 Name = name
             };
 
-            using (var context = _contextFactory.CreateContext())
-            {
-                var repository = new DbRepository<Tournament>(context);
-                await repository.AddAsync(tournament);
+            return tournament;
 
-                return tournament;
-            }
+            //using (var context = _contextFactory.CreateContext())
+            //{
+            //    var repository = new DbRepository<Tournament>(context);
+            //    await repository.AddAsync(tournament);
+
+            //    return tournament;
+            //}
         }
     }
 }

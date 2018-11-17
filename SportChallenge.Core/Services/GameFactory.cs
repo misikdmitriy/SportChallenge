@@ -11,6 +11,8 @@ namespace SportChallenge.Core.Services
             {
                 GuestTeam = guest,
                 HomeTeam = home,
+                GuestTeamId = guest.Id,
+                HomeTeamId = home.Id,
                 Result = null
             };
         }

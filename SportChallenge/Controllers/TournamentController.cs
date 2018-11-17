@@ -17,13 +17,22 @@ namespace SportChallenge.Controllers
             _mediator = mediator;
         }
 
-        [HttpPut("add")]
+        [HttpPut("")]
         public async Task<IActionResult> CreateTournament(TournamentCreateModel model)
         {
             var request = new CreateTournamentRequest(model.TournamentName, model.TeamNames);
             await _mediator.Send(request);
 
             return Ok();
+        }
+
+        [HttpGet("")]
+        public async Task<IActionResult> GetTournament(string tournamentName)
+        {
+            var request = new GetTournamentRequest(tournamentName);
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
         }
     }
 }

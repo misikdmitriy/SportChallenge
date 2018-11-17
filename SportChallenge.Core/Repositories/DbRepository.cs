@@ -12,33 +12,33 @@ namespace SportChallenge.Core.Repositories
     public class DbRepository<TEntity> : IDbRepository<TEntity>
             where TEntity : class, IIDentifiable
     {
-        private readonly SportContext _context;
+        protected readonly SportContext Context;
 
         public DbRepository(SportContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         public async Task<TEntity[]> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await GetQuery(_context).Where(predicate).ToArrayAsync();
+            return await GetQuery(Context).Where(predicate).ToArrayAsync();
         }
 
         public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await GetQuery(_context).SingleOrDefaultAsync(predicate);
+            return await GetQuery(Context).SingleOrDefaultAsync(predicate);
         }
 
         public async Task AddAsync(TEntity entity)
         {
-            await _context.Set<TEntity>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await Context.Set<TEntity>().AddAsync(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(TEntity entity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            Context.Entry(entity).State = EntityState.Modified;
+            await Context.SaveChangesAsync();
         }
 
         protected virtual IQueryable<TEntity> GetQuery(SportContext context)

@@ -9,7 +9,7 @@ namespace SportChallenge.Core.EntityConfigurations
         public void Configure(EntityTypeBuilder<Round> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasMany(x => x.Games).WithOne();
+            builder.HasMany(x => x.Games).WithOne(x => x.Round);
             builder.Property(x => x.Number).IsRequired();
         }
     }
