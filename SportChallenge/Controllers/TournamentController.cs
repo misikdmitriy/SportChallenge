@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using SportChallenge.MediatorRequests;
 using SportChallenge.Models;
@@ -52,6 +54,27 @@ namespace SportChallenge.Controllers
             var result = await _mediator.Send(request);
 
             return Ok(result);
+        }
+
+        [HttpGet("csv")]
+        public async Task<IActionResult> ToCsv(string tournamentName)
+        {
+            var request = new ToScvRequest(tournamentName);
+            var result = await _mediator.Send(request);
+
+            return File(result, System.Net.Mime.MediaTypeNames.Application.Octet,
+                $"{tournamentName}.csv");
+        }
+
+        [HttpPut("csv")]
+        public async Task<IActionResult> FromCsv(string tournamentName)
+        {
+            Request.EnableRewind();
+
+            var request = new FromScvRequest(Request.Form.Files.First(), tournamentName);
+            await _mediator.Send(request);
+
+            return Ok();
         }
 
         private async Task<IActionResult> GetTournament(string tournamentName, GameType gameType)
