@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportChallenge.Core", "Spor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportChallenge.ApiTests", "SportChallenge.ApiTests\SportChallenge.ApiTests.csproj", "{2F4E84B8-5037-4722-A944-DF77D5C1EF4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportChallenge.UnitTests", "SportChallenge.UnitTests\SportChallenge.UnitTests.csproj", "{A3724595-85C2-4FEB-B71C-7A1B93118AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2F4E84B8-5037-4722-A944-DF77D5C1EF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F4E84B8-5037-4722-A944-DF77D5C1EF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F4E84B8-5037-4722-A944-DF77D5C1EF4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3724595-85C2-4FEB-B71C-7A1B93118AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3724595-85C2-4FEB-B71C-7A1B93118AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3724595-85C2-4FEB-B71C-7A1B93118AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3724595-85C2-4FEB-B71C-7A1B93118AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
