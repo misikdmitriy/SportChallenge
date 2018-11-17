@@ -7,9 +7,9 @@ using SportChallenge.Core.Repositories.Contracts;
 
 namespace SportChallenge.Core.Repositories
 {
-    public class GameRepsoitory : DbRepository<Game>, IGameRepository
+    public class GameRepository : DbRepository<Game>, IGameRepository
     {
-        public GameRepsoitory(SportContext context) : base(context)
+        public GameRepository(SportContext context) : base(context)
         {
         }
 
@@ -29,6 +29,13 @@ namespace SportChallenge.Core.Repositories
             return await GetQuery(Context)
                 .Where(x => x.HomeTeam.Tournament.Id == tournamentId)
                 .ToArrayAsync();
+        }
+
+        public async Task<Game> GetGame(int homeTeamId, int guestTeamId)
+        {
+            return await GetQuery(Context)
+                .SingleOrDefaultAsync(x => x.HomeTeam.Id == homeTeamId && 
+                                           x.GuestTeam.Id == guestTeamId);
         }
     }
 }

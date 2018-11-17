@@ -26,7 +26,7 @@ namespace SportChallenge.Core.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,9 +59,9 @@ namespace SportChallenge.Core.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    HomeTeamId = table.Column<int>(nullable: true),
-                    GuestTeamId = table.Column<int>(nullable: true),
-                    RoundId = table.Column<int>(nullable: true)
+                    RoundId = table.Column<int>(nullable: true),
+                    HomeTeamId = table.Column<int>(nullable: false),
+                    GuestTeamId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace SportChallenge.Core.Migrations
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -132,6 +132,13 @@ namespace SportChallenge.Core.Migrations
                 name: "IX_Teams_TournamentId",
                 table: "Teams",
                 column: "TournamentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tournaments_Name",
+                table: "Tournaments",
+                column: "Name",
+                unique: true,
+                filter: "[Name] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -25,9 +25,9 @@ namespace SportChallenge.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GuestTeamId");
+                    b.Property<int>("GuestTeamId");
 
-                    b.Property<int?>("HomeTeamId");
+                    b.Property<int>("HomeTeamId");
 
                     b.Property<int?>("RoundId");
 
@@ -99,10 +99,13 @@ namespace SportChallenge.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Tournaments");
                 });
@@ -111,20 +114,22 @@ namespace SportChallenge.Core.Migrations
                 {
                     b.HasOne("SportChallenge.Core.Models.Team", "GuestTeam")
                         .WithMany()
-                        .HasForeignKey("GuestTeamId");
+                        .HasForeignKey("GuestTeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SportChallenge.Core.Models.Team", "HomeTeam")
                         .WithMany()
-                        .HasForeignKey("HomeTeamId");
+                        .HasForeignKey("HomeTeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SportChallenge.Core.Models.Round")
+                    b.HasOne("SportChallenge.Core.Models.Round", "Round")
                         .WithMany("Games")
                         .HasForeignKey("RoundId");
                 });
 
             modelBuilder.Entity("SportChallenge.Core.Models.GameResult", b =>
                 {
-                    b.HasOne("SportChallenge.Core.Models.Game")
+                    b.HasOne("SportChallenge.Core.Models.Game", "Game")
                         .WithOne("Result")
                         .HasForeignKey("SportChallenge.Core.Models.GameResult", "GameId")
                         .OnDelete(DeleteBehavior.Cascade);

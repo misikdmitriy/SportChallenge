@@ -45,6 +45,9 @@ namespace SportChallenge
             builder.RegisterType<GameFactory>()
                 .As<IGameFactory>();
 
+            builder.RegisterType<GameResultFactory>()
+                .As<IGameResultFactory>();
+
             builder.RegisterType<RoundsService>()
                 .As<IRoundsService>();
 

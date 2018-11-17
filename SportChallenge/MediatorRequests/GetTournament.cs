@@ -43,7 +43,7 @@ namespace SportChallenge.MediatorRequests
                     return null;
                 }
 
-                var gamesRepository = new GameRepsoitory(context);
+                var gamesRepository = new GameRepository(context);
                 var games = await gamesRepository.GetTournamentGames(tournament.Id);
 
                 return new TournamentModel
