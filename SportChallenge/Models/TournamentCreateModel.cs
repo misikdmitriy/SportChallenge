@@ -3,6 +3,6 @@
     public class TournamentCreateModel
     {
         public string TournamentName { get; set; }
-        public string[] TeamNames { get; set; }
+        public int TeamsCount { get; set; }
     }
 }

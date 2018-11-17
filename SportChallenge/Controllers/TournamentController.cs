@@ -20,10 +20,10 @@ namespace SportChallenge.Controllers
         [HttpPut("")]
         public async Task<IActionResult> CreateTournament(TournamentCreateModel model)
         {
-            var request = new CreateTournamentRequest(model.TournamentName, model.TeamNames);
-            await _mediator.Send(request);
+            var request = new CreateTournamentRequest(model.TournamentName, model.TeamsCount);
+            var tournament = await _mediator.Send(request);
 
-            return Ok();
+            return Ok(tournament.Name);
         }
 
         [HttpGet("")]

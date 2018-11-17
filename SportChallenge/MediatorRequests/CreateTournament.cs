@@ -12,11 +12,11 @@ namespace SportChallenge.MediatorRequests
     public class CreateTournamentRequest : IRequest<Tournament>
     {
         public string TournamentName { get; }
-        public string[] TeamNames { get; }
+        public int TeamsCount { get; }
 
-        public CreateTournamentRequest(string tournamentName, string[] teamNames)
+        public CreateTournamentRequest(string tournamentName, int teamsCount)
         {
-            TeamNames = teamNames;
+            TeamsCount = teamsCount;
             TournamentName = tournamentName;
         }
     }
@@ -40,7 +40,7 @@ namespace SportChallenge.MediatorRequests
             using (var context = _contextFactory.CreateContext())
             using (var transaction = context.Database.BeginTransaction())
             {
-                var tournament = await _tournamentFactory.Create(request.TournamentName, request.TeamNames);
+                var tournament = _tournamentFactory.Create(request.TournamentName, request.TeamsCount);
 
                 var tournamentRepository = new DbRepository<Tournament>(context);
                 await tournamentRepository.AddAsync(tournament);

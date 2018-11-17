@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using SportChallenge.Core.Models;
+﻿using SportChallenge.Core.Models;
 
 namespace SportChallenge.Core.Services.Contracts
 {
     public interface ITournamentFactory
     {
-        Task<Tournament> Create(string name, params string[] teamNames);
+        Tournament Create(string name, int teamsCount);
     }
 }
