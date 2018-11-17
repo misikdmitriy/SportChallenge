@@ -38,6 +38,13 @@ namespace SportChallenge.Core.Repositories
                 .ToArrayAsync();
         }
 
+        public async Task<Game[]> GetPlannedTournamentGames(int tournamentId)
+        {
+            return await GetQuery(Context)
+                .Where(x => x.Result == null && x.HomeTeam.Tournament.Id == tournamentId)
+                .ToArrayAsync();
+        }
+
         public async Task<Game> GetGame(int homeTeamId, int guestTeamId)
         {
             return await GetQuery(Context)

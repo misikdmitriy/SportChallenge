@@ -7,6 +7,7 @@ namespace SportChallenge.Core.Repositories.Contracts
     {
         Task<Game[]> GetTournamentGames(int tournamentId);
         Task<Game[]> GetPlayedTournamentGames(int tournamentId);
+        Task<Game[]> GetPlannedTournamentGames(int tournamentId);
         Task<Game> GetGame(int homeTeamId, int guestTeamId);
     }
 }

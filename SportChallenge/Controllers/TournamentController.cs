@@ -26,19 +26,37 @@ namespace SportChallenge.Controllers
             return Ok(tournament.Name);
         }
 
+        [HttpGet("all")]
         [HttpGet("")]
-        public async Task<IActionResult> GetTournament(string tournamentName)
+        public Task<IActionResult> GetTournament(string tournamentName)
         {
-            var request = new GetTournamentRequest(tournamentName);
-            var result = await _mediator.Send(request);
+            return GetTournament(tournamentName, GameType.All);
+        }
 
-            return Ok(result);
+        [HttpGet("played")]
+        public Task<IActionResult> GetPlayedTournament(string tournamentName)
+        {
+            return GetTournament(tournamentName, GameType.Played);
+        }
+
+        [HttpGet("planned")]
+        public Task<IActionResult> GetPlanedTournament(string tournamentName)
+        {
+            return GetTournament(tournamentName, GameType.Planned);
         }
 
         [HttpGet("table")]
         public async Task<IActionResult> GetTournamentTable(string tournamentName)
         {
             var request = new GetTournamentTableRequest(tournamentName);
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
+
+        private async Task<IActionResult> GetTournament(string tournamentName, GameType gameType)
+        {
+            var request = new GetTournamentRequest(tournamentName, gameType);
             var result = await _mediator.Send(request);
 
             return Ok(result);
